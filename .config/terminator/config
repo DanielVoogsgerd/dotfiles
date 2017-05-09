@@ -1,0 +1,29 @@
+[global_config]
+  borderless = True
+  title_font = Meslo LG L 9
+  title_use_system_font = False
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#242424"
+    background_darkness = 0.81
+    background_image = None
+    background_type = transparent
+    cursor_color = "#00aa00"
+    font = Meslo LG L Bold 10
+    foreground_color = "#eeeed9"
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    scrollback_infinite = True
+    scrollback_lines = 501
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False

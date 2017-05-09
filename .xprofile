@@ -1,0 +1,18 @@
+#!/bin/sh
+export ENVIRONMENT="$HOME/Environment"
+export PATH="$PATH:$ENVIRONMENT/bin"
+
+# The XDG Path variables
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
+
+if [ -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs ]; then
+    . ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
+    export XDG_DESKTOP_DIR XDG_DOWNLOAD_DIR XDG_TEMPLATES_DIR XDG_PUBLICSHARE_DIR XDG_DOCUMENTS_DIR XDG_MUSIC_DIR XDG_PICTURES_DIR XDG_VIDEOS_DIR
+fi
+
+[[ -f ~/.Xresources ]] && xrdb -merge "${HOME}/.Xresources"
+
+# Start the gnome keyring
+eval $(/usr/bin/gnome-keyring-daemon --replace --components=gpg,pkcs11,secrets,ssh)
+export SSH_ASKPASS SSH_AUTH_SOCK GPG_AGENT_INFO GNOME_KEYRING_CONTROL GNOME_KEYRING_PID
