@@ -107,9 +107,11 @@
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
+	rba = rebase --interactive --autosquash --root
+	fixup = commit --fixup
+	whatido = show --stat
+	wid = show --stat
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.config/git/gitignore
