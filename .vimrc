@@ -12,38 +12,45 @@ Plugin 'VundleVim/Vundle.vim'
 
 
 " Personal Plugins
-Plugin 'airblade/vim-gitgutter'
 Plugin 'Altercation/Vim-Colors-Solarized'
 Plugin 'Atweiden/Vim-Hudigraphs'
 Plugin 'Bling/Vim-Airline'
-Plugin 'Chrisbra/Unicode.vim'
 Plugin 'ChrisKempson/Base16-vim'
+Plugin 'Chrisbra/Unicode.vim'
 Plugin 'FuzzyFinder'
 Plugin 'Godlygeek/Tabular'
 Plugin 'L9'
 Plugin 'Lokaltog/Vim-Easymotion'
-Plugin 'Rodjek/Vim-Puppet'
 Plugin 'Potatoesmaster/i3-Vim-Syntax'
+Plugin 'Rodjek/Vim-Puppet'
 Plugin 'Rstacruz/Sparkup', {'rtp': 'vim/'}
-Plugin 'Scrooloose/Syntastic'
 Plugin 'Scrooloose/NERDTree'
+Plugin 'Scrooloose/Syntastic'
 Plugin 'Sheerun/Vim-Polyglot'
 Plugin 'Sickill/Vim-Monokai'
 Plugin 'TPope/Vim-Dispatch'
 Plugin 'TPope/Vim-Fugitive'
 Plugin 'TPope/Vim-Git'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'TPope/Vim-Repeat'
 Plugin 'TPope/Vim-Sensible'
 Plugin 'TPope/Vim-Surround'
+Plugin 'TPope/Vim-Eunuch'
 Plugin 'Trusktr/Seti.vim'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'lervag/vimtex'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'triglav/vim-visual-increment'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
 
 " Syntax plugins
 Plugin 'NGiNX.vim'
 Plugin 'yeahnoob/icinga2-vim'
 Plugin 'Leafgarland/Typescript-Vim'
+Plugin 'nvie/vim-flake8'
+
 
 call vundle#end()
 " End Plugins
@@ -79,6 +86,7 @@ set cursorline
 set backupdir=/tmp
 set swapfile
 set dir=/tmp
+set showcmd
 
 " Remaps
 nnoremap ; :
@@ -105,15 +113,29 @@ set hlsearch
 let mapleader = ","
 let g:mapleader = ","
 
+" Let's stop using the arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+noremap <ScrollWheelUp> <NOP>
+noremap <S-ScrollWheelUp> <NOP>
+noremap <ScrollWheelDown> <NOP>
+noremap <S-ScrollWheelDown> <NOP>
+
 " Down is really the next line
 nnoremap j gj
 nnoremap k gk
 
-" Keybinds
-vmap <leader>so :sort u<CR>
+" Quickly open vimrc
+command! Vimrc :e ~/.vimrc
+nnoremap <leader>rc :Vimrc<CR>
+command! Reload :so $MYVIMRC
+nnoremap <leader>rl :Reload<CR>
 
-" Fast saves
-nmap <leader><leader>w :w!<cr>
+" Keybinds
+vnoremap <leader>so :sort u<CR>
 
 " I paste a lot from my X11 clipboard
 noremap <leader>v "+p
@@ -123,13 +145,14 @@ noremap <leader>c "+y
 " Easymotion
 nmap s <Plug>(easymotion-w)
 
-" Fuzzyfinder keybindings
-nmap <leader>f :FufFileWithCurrentBufferDir<CR>
-nmap <leader>b :FufBuffer<CR>
-nmap <leader>t :FufTaggedFile<CR>
-
 " NERDTree keybindings
-nmap <leader>1 :NERDTree<CR>
+nmap <leader>1 :NERDTreeToggle<CR>
+
+" YouCompleteMe keybindings
+nnoremap <leader>d  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Tagbar
+map <leader>t :TagbarToggle<CR>
 
 " Git bindings
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -138,10 +161,15 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gc :Gcommit -q<CR>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
+nnoremap <leader>gps :Gpush<CR>
+nnoremap <leader>gpl :Gpull<CR>
 nnoremap <leader>go :Copen<CR>
 nnoremap <leader>gg :GitGutterSignsToggle<CR>
+
+nmap <Leader>gsh <Plug>GitGutterStageHunk
+nmap <Leader>gnh <Plug>GitGutterNextHunk
+nmap <Leader>gph <Plug>GitGutterPrevHunk
+
 
 let g:gitgutter_map_keys = 0
 
@@ -151,6 +179,9 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+" Execute the current file
+nnoremap <Leader>e :!./#<CR>
+
 " Colourcolumn
 highligh ColorColumn ctermbg=darkgrey
 set colorcolumn=81,121
@@ -158,6 +189,14 @@ set colorcolumn=81,121
 " Trailing whitespace and incorrect indentation
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
+
+" This probably makes some people cringe, but it's nice and consistent
+nnoremap <C-T> :tabe<CR>
+nnoremap <C-W> :tabclose<CR>
+
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
 
 " Since visual block mode is way better than visual mode; why don't we just swap them.
 nnoremap    v   <C-V>
@@ -184,7 +223,7 @@ nmap ;sd :set invspell spelllang=nl<CR>
 cmap w!! w !sudo tee > /dev/null %
 
 " Map CTRL-K to a list diagraph without losing context
-inoremap <expr> <C-K> ShowDigraphs()
+" inoremap <expr> <C-K> ShowDigraphs()
 
 function! ShowDigraphs ()
     digraphs
@@ -205,3 +244,5 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height = 3
+
+let g:vimtex_view_general_viewer = 'mupdf'
