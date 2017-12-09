@@ -21,3 +21,5 @@ set suspend
 
 # OMG why isn't this default yet?
 set tabsize 4
+
+include /usr/share/nano/*
