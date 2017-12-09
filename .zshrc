@@ -8,7 +8,7 @@ export TERM=xterm-256color
 ZSH=$HOME/.zsh
 cdir=$HOME/.cdir
 
-export PATH="$PATH:$ENVIRONMENT/bin:$HOME/.config/composer/vendor/bin:./vendor/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.config/composer/vendor/bin:./vendor/bin"
 export OS=$(lsb_release -si)
 
 export USERRUNDIR="/run/user/$(id -u)"
