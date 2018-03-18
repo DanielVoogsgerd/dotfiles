@@ -26,7 +26,7 @@ horizontal_padding = 2
 separator_color = auto
 startup_notification = true
 dmenu = /usr/bin/dmenu -p dunst:
-browser = /usr/bin/opera
+browser = /usr/bin/google-chrome-stable
 
 [frame]
 width = 0
