@@ -114,8 +114,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Let's stop using the arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
+noremap <Up> :m -2<CR>
+noremap <Down> :m +1<CR>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
