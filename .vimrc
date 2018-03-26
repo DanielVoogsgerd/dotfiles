@@ -57,6 +57,14 @@ call vundle#end()
 
 filetype plugin indent on
 
+function! LoadColorscheme(name)
+    let pat = 'colors/'.a:name.'.vim'
+    if !empty(globpath(&rtp, pat))
+        colorscheme seti
+    endif
+endfunction
+
+
 " We like colors :D
 set t_Co=256
 
@@ -72,7 +80,7 @@ set noshowmode
 hi clear
 syntax on
 set background=dark
-colorscheme seti
+:call LoadColorscheme('seti')
 
 " Make the background transparent
 hi Normal ctermbg=none
