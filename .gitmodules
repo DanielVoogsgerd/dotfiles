@@ -4,3 +4,6 @@
 [submodule ".zsh/vcs"]
 	path = .zsh/vcs
 	url = https://github.com/yonchu/zsh-vcs-prompt
+[submodule ".zsh/fasd"]
+	path = .zsh/fasd
+	url = https://github.com/clvv/fasd.git
