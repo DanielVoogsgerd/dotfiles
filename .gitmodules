@@ -1,3 +1,6 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim
+[submodule ".zsh/vcs"]
+	path = .zsh/vcs
+	url = https://github.com/yonchu/zsh-vcs-prompt
