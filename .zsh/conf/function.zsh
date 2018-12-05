@@ -96,10 +96,6 @@ function vga {
     esac
 }
 
-function editbin {
-    $EDITOR `which $1`
-}
-
 function server {
     if [ -n "$1" ]; then
         PORT="$1"
@@ -133,6 +129,10 @@ function edit {
 		sleep 0.5
 		sudoedit $FILE
     fi
+}
+
+function editbin {
+    edit `which $1`
 }
 
 function calc() {
