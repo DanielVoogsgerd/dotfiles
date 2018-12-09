@@ -77,3 +77,6 @@ alias cda="composer dumpautoload"
 alias lmigrate="artisan migrate"
 alias lseed="artisan db:seed"
 alias lmreset="artisan migrate:reset"
+
+# Activate virtualenv
+alias activate="source ./bin/activate"
