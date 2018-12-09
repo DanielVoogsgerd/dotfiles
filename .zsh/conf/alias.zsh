@@ -38,7 +38,7 @@ alias e="edit"
 alias t="tree"
 alias n="touch"
 alias clip="xclip -sel clip"
-alias c='pygmentize -O style=monokai -f console256 -g'
+alias c='pygmentize -O style=base16-material-darker -f console256 -g'
 alias ':q'='exit'
 alias open="xdg-open"
 alias todo="cliist"
