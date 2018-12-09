@@ -4,18 +4,6 @@ function getIP {
     wget -q -O - http://checkip.dyndns.com/ | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+"
 }
 
-function fuck {
-    if [[ "$1" == "you" ]]; then
-        shift
-        pkill -9 "$@"
-    elif [[ "$1" == "of" ]]; then
-        shift
-        pkill -9 "$@"
-    else
-        echo "Fuck who??"
-    fi
-}
-
 function die() {
    echo $1
    return 1
