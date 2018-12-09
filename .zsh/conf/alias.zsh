@@ -50,7 +50,6 @@ alias temp='cd "$(mktemp -d)"'
 # And some fasd aliases
 function ef { edit `f $1` }
 
-
 # Conserve directories
 alias conserveDir="pwd>$cdir"
 alias tmux="conserveDir && tmux -2"
@@ -66,9 +65,6 @@ alias cp="rsync -aP"
 # Because capslock should have been ctrl for the get go
 alias swapcaps="/usr/bin/setxkbmap -option 'ctrl:swapcaps'"
 alias SWAPCAPS="/usr/bin/setxkbmap -option 'ctrl:swapcaps'"
-
-# I love using geektools for whois
-alias whois="whois -h whois.geektools.com"
 
 # For people working with Laravel this is very useful
 alias art="php artisan"
