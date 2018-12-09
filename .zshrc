@@ -5,7 +5,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-ZSH=$HOME/.zsh
+ZSH=$HOME/.config/zsh
 cdir=$HOME/.cdir
 
 
