@@ -47,6 +47,10 @@ load $HOME/.userconfig/zsh/after.zsh "Loading userspecific settings (after)"
 
 typeset -U path cdpath fpath
 
+load /usr/share/fzf/completion.zsh "Loading fzf completion"
+load /usr/share/fzf/key-bindings.zsh "Loading fzf key-bindings"
+
+
 if [[ "$USER" != 'root' ]]; then
 	clear
 
