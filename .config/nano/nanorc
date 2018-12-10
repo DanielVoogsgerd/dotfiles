@@ -3,9 +3,6 @@
 ## This file is all about damage control.
 
 
-# Yay behaviour that vim has by default...
-set const
-
 # Yes why is that line there in the first place.
 set morespace
 
