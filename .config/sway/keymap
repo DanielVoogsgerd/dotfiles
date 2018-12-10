@@ -27,7 +27,7 @@
     bindsym $mod+Shift+e exit
 
 	bindsym $mod+o exec lock
-	bindsym Print exec screenshottool interface
+	bindsym Print exec screenshot interface
 #
 # Moving around:
 #
