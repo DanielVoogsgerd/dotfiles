@@ -1,0 +1,23 @@
+#!/bin/sh
+if [ ! -e /sys/class/power_supply/BAT*/capacity ]; then
+	exit 1
+fi
+
+if [ $(cat /sys/class/power_supply/BAT*/status) == "Charging" ]; then
+	echo "<span foreground='#4CAF50'></span>"
+	exit 0
+fi
+
+BAT=$(cat /sys/class/power_supply/BAT*/capacity)
+if [ $BAT -lt 10 ]; then
+	echo ' '
+	exit 33
+elif [ $BAT -lt 25 ]; then
+	echo ''
+elif [ $BAT -lt 50 ]; then
+	echo ' '
+elif [ $BAT -lt 75 ]; then
+	echo ' '
+else
+	echo ' '
+fi

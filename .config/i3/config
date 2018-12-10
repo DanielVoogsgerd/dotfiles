@@ -1,0 +1,282 @@
+# First let's execute some things
+
+# Automatically lock after 10 minutes
+exec xautolock -time 10 -locker 'i3lock-fancy'
+exec systemctl --user start wm.target compton@0.service wallpaper@0.timer
+exec display-fix
+
+
+set $mod Mod4
+
+font pango: SF Pro Display 11
+
+floating_modifier $mod
+
+focus_follows_mouse no
+
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Several dmenu-esque applications
+# bindsym $mod+p exec i3-dmenu-desktop --dmenu="dmenu -i -p 'Launch'" --entry-type="name"
+#bindsym $mod+p exec i3-dmenu-desktop --dmenu="rofi -dmenu -i -lines 5 -p 'Launch'" --entry-type="name"
+bindsym $mod+p exec rofi -show drun -display-drun Launch
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+shift+d exec export | xmessage -file -
+bindsym $mod+x [urgent=latest] focus
+bindsym $mod+e exec nautilus
+bindsym $mod+Ctrl+r exec wallpaper --random
+
+
+
+# FN-keys
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+
+
+# change focus; Shifted one from the default config to be compatible with vim.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows; Shifted one from the default config to be compatible with vim.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move workspace
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Down move workspace to output Down
+bindsym $mod+Ctrl+Up move workspace to output Up
+bindsym $mod+Ctrl+Right move workspace to output Right
+
+# split in horizontal/vertical orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+t layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace9 "9 "
+set $workspace10 "10 "
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+bindsym $mod+minus scratchpad show
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+minus move scratchpad
+
+# Window borders
+for_window [class="^.*"] border pixel 1
+smart_borders on
+
+# Gaps
+# smart_gaps on
+gaps inner 20
+gaps outer 20
+
+# Workspace assignments
+
+# Chrome apps
+assign [title="Videostream"] $workspace8
+for_window [title="Videostream"] move to workspace $workspace8
+assign [title="Netflix" window_role="pop-up"] $workspace8
+for_window [title="Netflix" window_role="pop-up"] move to workspace $workspace8
+
+for_window [class="MuPDF"] resize shrink width 10000px; resize grow width 400px; resize shrink height 10000px; resize grow height 800px
+
+
+assign [class="Hexchat"] $workspace9
+assign [class="Telegram"] $workspace9
+assign [class="Thunderbird"] $workspace5
+assign [class="jetbrains-phpstorm"] $workspace3
+assign [class="Terminator"] $workspace2
+assign [title="Google Hangouts - *" window_role="pop-up"] $workspace9
+for_window [title="Google Hangouts - *"] move to workspace $workspace9
+assign [class="Cutegram"] $workspace9
+
+assign [class="whatsapp-desktop"] $workspace9
+for_window [class="whatsapp-desktop"] move to workspace $workspace9
+
+# Spotify does not set the hints when mapping the window
+assign [class="Spotify"] $workspace10
+for_window [class="Spotify"] move to workspace $workspace10
+
+
+# Assign certain workspaces to certain monitors
+workspace $workspace1 output DP1-1
+workspace $workspace2 output DP1-1
+workspace $workspace3 output DP1-1
+workspace $workspace8 output HDMI2
+workspace $workspace9 output HDMI2
+workspace $workspace10 output HDMI2
+
+
+# Some windows should not be tiled (Mainly dialogs)
+for_window [title="Authy"] floating enable
+for_window [class="Gtkdialog"] floating enable
+for_window [class="Gnome-control-center"] floating enable
+for_window [class="Firefox" window_role="Preferences"] floating enable
+for_window [class="Firefox" instance="Download"] floating enable
+for_window [class="X-terminal-emulator" title="Terminator Preferences"] floating enable
+for_window [class="Update-manager"] floating enable
+for_window [class="Gcr-prompter"] floating enable
+for_window [class="Gnome-keyring-prompt-3"] floating enable
+for_window [class="Gnome-system-monitor"] floating enable
+for_window [class="Apport-gtk"] floating enable
+for_window [class="Agave"] floating enable
+for_window [class="Gcalctool"] floating enable
+for_window [class="Komodo edit" instance="Update"] floating enable
+for_window [class="Komodo edit" instance="Komodo_gotofile"] floating enable
+for_window [class="Nautilus" instance="file_progress"] floating enable
+for_window [class="Thunar" title="File Operation Progress"] floating enable
+for_window [class="Gstm"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Google-chrome*" title="Select Image - *"] floating enable
+for_window [class="Qt4-ssh-askpass"] floating enable
+for_window [class="Gpick"] floating enable; focus mode_toggle
+for_window [class="dolphin" title="^Copying"] floating enable
+for_window [class="albert"] border none;
+
+# reload/restart the configuration file
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/power_menu
+
+# resize window (you can also use the mouse for that)
+mode "Resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    bindsym h resize shrink width  10 px or 10 ppt
+    bindsym i resize grow   height 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
+    bindsym k resize grow   width  10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width  10 px or 10 ppt
+    bindsym Down resize grow   height 10 px or 10 ppt
+    bindsym Up resize shrink   height 10 px or 10 ppt
+    bindsym Right resize grow  width  10 px or 10 ppt
+
+    # Finetuning can be nice aswell
+    bindsym shift+h resize shrink width  5 px or 5 ppt
+    bindsym shift+j resize grow   height 5 px or 5 ppt
+    bindsym shift+k resize shrink height 5 px or 5 ppt
+    bindsym shift+l resize grow   width  5 px or 5 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym shift+Left resize shrink width  5 px or 5 ppt
+    bindsym shift+Down resize grow   height 5 px or 5 ppt
+    bindsym shift+Up resize shrink   height 5 px or 5 ppt
+    bindsym shift+Right resize grow  width  5 px or 5 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "Resize"
+
+# Colour scheme
+set $base00 #212121
+set $base01 #303030
+set $base02 #353535
+set $base03 #4A4A4A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+
+# And some transparency
+set $transparent #00000000
+set $semitransparent #212121BB
+
+bar {
+    position top
+    status_command i3blocks
+    font pango: SF Pro Display 11
+    colors {
+        separator  $semitransparent
+        background $semitransparent
+        statusline $semitransparent
+        focused_workspace  $semitransparent $semitransparent $base0D
+        active_workspace   $semitransparent $semitransparent $base03
+        inactive_workspace $semitransparent $semitransparent $base03
+        urgent_workspace   $red         $red         $base05
+    }
+}
+
+bindsym $mod+o exec i3lock-fancy
+bindsym Print exec screenshottool
+
+hide_edge_borders both
+client.focused          $base0D	$base0D	$base05	$base0D
+client.focused_inactive $base0C	$base0C	$base05	$base0C
+client.unfocused        $base03	$base03	$base05	$base03
+client.urgent           $red	$red	$base05	$red
+
+
+no_focus [class="plasmashell"]
+no_focus [window_role="pop-up"]
+no_focus [window_type="notification"]
+

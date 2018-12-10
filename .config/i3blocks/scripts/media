@@ -1,0 +1,89 @@
+#!/usr/bin/python
+
+import os
+import subprocess
+from guessit import guessit
+import playerctl
+from urllib.parse import unquote
+
+def test():
+    print('test')
+    os.sys.exit(0)
+
+
+def spotify(player):
+    artist = player.metadata("artist")
+    title = player.metadata("title")
+
+    print("{:s} - {:s}".format(artist, title))
+
+def vlc(player):
+    title = unquote(player.metadata("xesam:url"))
+
+    # Get filename from path
+    filename = os.path.basename(title)
+
+    guessinfo = guessit(filename)
+    if guessinfo['type'] == "episode":
+        print("{:s}, Season: {:d}, Episode: {:d}".format(guessinfo['title'], guessinfo['season'], guessinfo['episode']))
+    elif guessinfo['type'] == "movie":
+        print("{:s} ({:d})".format(guessinfo['title'], guessinfo['year']))
+
+def mpv(player):
+    title = unquote(player.metadata("xesam:title"))
+
+    # Get filename from path
+    filename = os.path.basename(title)
+
+    guessinfo = guessit(filename)
+    if guessinfo['type'] == "episode":
+        print("{:s}, Season: {:d}, Episode: {:d}, {:s}".format(guessinfo['title'], guessinfo['season'], guessinfo['episode'], guessinfo['episode_title']))
+    elif guessinfo['type'] == "movie":
+        print("{:s} ({:d})".format(guessinfo['title'], guessinfo['year']))
+
+def handleInput(player):
+    commandlist = {
+        "1": "play-pause",
+        "4": "next",
+        "5": "previous",
+        "8": "previous",
+        "9": "next"
+    }
+
+    if 'BLOCK_BUTTON' in os.environ and os.environ['BLOCK_BUTTON'] in commandlist:
+        button = os.environ['BLOCK_BUTTON']
+
+        player.command(commandlist[button])
+        status = subprocess.check_output(["playerctl", "-p", player.player, "status"]).decode('UTF-8').split('\n')[0]
+
+def main():
+    playerName = os.sys.argv[1]
+
+    players = {
+        'vlc': vlc,
+        'mpv': mpv,
+        'spotify': spotify
+    }
+
+    if playerName in players:
+        player = playerctl.player(playerName)
+        status = player.status()
+        # Handle the input
+        handleInput(player)
+
+        # No player no use
+        if status == "Not available":
+            #print('Player is not available')
+            os.sys.exit(0)
+
+
+        os.sys.stdout.write(' ' if status == "Paused" else " ")
+        players[playerName](player)
+        os.sys.exit()
+    else:
+        os.sys.exit(1)
+        print('Player is not supported')
+
+
+if __name__ == "__main__":
+    main()

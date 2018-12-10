@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#NEXT_UP=$(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"\t" 'NR==1{ print $1 " " $2 " " $3 " " $4 " " $5 }')
+
+
+IFS=$'\n'
+
+i=0
+for NEXT_UP in $(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"\t" '{ print $1 " " $2 " " $3 " " $4 " " $5 }'); do
+	START_DATE=${NEXT_UP:0:10}
+	START_TIME=${NEXT_UP:11:5}
+	START_DATETIME=${NEXT_UP:0:16}
+
+	END_DATE=${NEXT_UP:17:10}
+	END_TIME=${NEXT_UP:28:5}
+	END_DATETIME=${NEXT_UP:17:16}
+
+	EVENT=${NEXT_UP:34}
+
+	IN_X_HOURS=$(date -d "+$1 hour" "+%F %H:%M")
+	NOW=$(date "+%F %H:%M")
+
+	# Event is over
+	[[ "$NOW" > "$END_DATETIME" ]] && continue
+
+	# Event is to far away
+	[[ "$IN_X_HOURS" < "$START_DATETIME" ]] && exit
+
+	[ "$i" -ne "0" ] && echo -n ' | '
+
+	echo -n "$START_TIME $EVENT"
+
+	i=$(($i+1))
+
+	[ "$i" -ge "$2" ] && exit
+done
+

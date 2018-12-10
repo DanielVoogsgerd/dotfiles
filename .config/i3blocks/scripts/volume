@@ -1,0 +1,14 @@
+#!/bin/bash
+vol="$(pamixer --get-volume)%"
+echo $vol
+
+case $BLOCK_BUTTON in
+	1) pavucontrol > /dev/null;;
+	2) pamixer -t;;
+	4) pamixer -i 5;;
+	5) pamixer -d 5;;
+esac
+
+if [[ $vol > 100 ]]; then
+	exit 33
+fi

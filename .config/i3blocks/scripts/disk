@@ -1,0 +1,11 @@
+#!/bin/bash
+disk=$(df -h -P -l ~ | tail -n 1)
+avail=$(echo $disk | awk '{ print $4 }')
+usagepercent=$(echo $disk | awk '{ print $5 }')
+
+if [[ ${usagepercent::-1} -le 90 ]]; then
+	# Hide available disk space when it's irrelevant
+	exit
+fi
+
+echo $avail

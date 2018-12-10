@@ -1,0 +1,45 @@
+command=$SCRIPT_DIR/$BLOCK_NAME
+color=#FFFFFF
+markup=pango
+
+
+[agenda]
+command=$SCRIPT_DIR/agenda 10 3
+interval=60
+label=
+
+
+[music]
+command=$SCRIPT_DIR/media spotify
+interval=1
+
+[vlc]
+command=$SCRIPT_DIR/media vlc
+interval=1
+
+[mpv]
+command=$SCRIPT_DIR/media mpv
+interval=1
+
+
+[packages]
+interval=600
+label=
+
+[load]
+interval=3
+label=
+
+[disk]
+interval=1
+label=
+
+[volume]
+label=
+interval=1
+
+[date]
+command=date '+%a %b %d %Y %H:%M'
+align=center
+interval=1
+label=

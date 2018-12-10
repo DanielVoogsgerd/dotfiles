@@ -1,0 +1,9 @@
+#!/bin/bash
+unupdatedPackages=$(trizen -Qu | wc -l)
+
+if [[ $unupdatedPackages == 0 ]]; then
+	exit
+fi
+
+echo $unupdatedPackages
+

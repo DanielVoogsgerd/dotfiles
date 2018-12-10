@@ -1,0 +1,18 @@
+#!/bin/bash
+IFS=$'\n'
+declare -A options
+
+options["Logout"]="i3-msg exit"
+options["Power off"]="systemctl poweroff"
+options["Reboot"]="systemctl reboot"
+options["Suspend"]="systemctl suspend"
+
+action=$(echo "${!options[*]}" | rofi -dmenu -i -p "Action")
+
+if [[ -v options[$action] ]]; then
+	eval ${options[$action]}
+else
+	echo "Action is not supported"
+	exit 1
+fi
+

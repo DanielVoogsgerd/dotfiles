@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) output=$mem;;
+	*) output=$load;;
+esac
+
+if [[ $BLOCK_BUTTON == 1 ]]; then
+	mem = $(free -h | grep Mem | awk '{print $4}')
+	exit
+fi
+
+
+
+
+# In case nothing was clicked we will return the load, but only if it exceeds the number of CPUs
+load="$(cut -d ' ' -f1 /proc/loadavg)"
+cpus="$(nproc)"
+if (( $(echo $load'<'$cpus | bc -l) )); then
+	# Load is low and therefore not relevant
+	exit
+fi
+
+echo $load
