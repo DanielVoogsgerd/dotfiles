@@ -1,5 +1,7 @@
-# vi:syntax=gitconfig
-# A lot of credit goes to Mathias Bynens here, he seems to have an awesome git config.
+[user]
+	name = Daniel Voogsgerd
+	email = daniel@voogsgerd.nl
+
 [push]
 	default = simple
 
@@ -48,8 +50,9 @@
 	st = status
 	df = diff
 	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate
+	hist = log --graph --date=short --decorate
 	lol = log --graph --oneline --decorate
+	overview = log --graph --oneline --decorate --all
 	graph = log --all --oneline --graph --abbrev=8 --decorate --date-order
 	today = log --all --oneline --graph --abbrev=8 --decorate --date-order --since 6AM
 	type = cat-file -t
