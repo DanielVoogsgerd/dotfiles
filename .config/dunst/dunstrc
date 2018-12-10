@@ -1,5 +1,5 @@
 [global]
-font = Helvetica 10
+font = SF Pro Display 11
 allow_markup = yes
 format = "<b>%s</b>\n%b"
 
@@ -18,7 +18,7 @@ geometry = "350x250-20+20"
 transparency = 20
 idle_threshold = 999
 monitor = 0
-follow = mouse
+# follow = mouse
 line_height = 1
 separator_height = 5
 padding = 16
@@ -27,6 +27,9 @@ separator_color = auto
 startup_notification = true
 dmenu = /usr/bin/dmenu -p dunst:
 browser = /usr/bin/google-chrome-stable
+	
+frame_color = "#EEFFFF"
+separator_color = "#EEFFFF"
 
 [frame]
 width = 0
@@ -39,16 +42,30 @@ history = ctrl+grave
 context = ctrl+shift+period
 
 [urgency_low]
-background = "#37474F"
-foreground = "#b2fcb5"
-timeout = 5
+	timeout = 5
 
 [urgency_normal]
-background = "#37474F"
-foreground = "#B3E5FC"
-timeout = 10
+	timeout = 10
 
 [urgency_critical]
-background = "#37474F"
-foreground = "#ff1744"
-timeout = 60
+	timeout = 60
+
+[base16_low]
+    msg_urgency = low
+    background = "#303030"
+    foreground = "#B2CCD6"
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#353535"
+    foreground = "#EEFFFF"
+
+[base16_critical]
+    msg_urgency = critical
+    background = "#F07178"
+    foreground = "#EEFFFF"
+
+#[whatsapp_web]
+## This notification will not be displayed
+#summary = "*WhatsApp Web is currently active"
+#format = ""
