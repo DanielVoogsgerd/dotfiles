@@ -1,0 +1,16 @@
+# vim: syntax=i3
+
+bar {
+    position top
+    status_command SCRIPT_DIR=~/.config/i3blocks/scripts i3blocks
+    font pango: SF Pro Display 11
+    colors {
+        separator  $semitransparent
+        background $semitransparent
+        statusline $semitransparent
+        focused_workspace  $semitransparent $semitransparent $base0D
+        active_workspace   $semitransparent $semitransparent $base03
+        inactive_workspace $semitransparent $semitransparent $base03
+        urgent_workspace   $red         $red         $base05
+    }
+}

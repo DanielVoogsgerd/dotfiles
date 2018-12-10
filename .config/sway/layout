@@ -1,0 +1,9 @@
+# vim: syntax=i3
+default_border pixel 1
+
+client.focused          $base0D	$base0D	$base05	$base0D $base0D
+client.focused_inactive $base0C	$base0C	$base05	$base0C $base0C
+client.unfocused        $base03	$base03	$base05	$base03 $base03
+client.urgent           $red	$red	$base05	$red	$red
+
+# Border, background, text, indicator, child-border

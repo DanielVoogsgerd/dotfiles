@@ -1,0 +1,7 @@
+# vim: syntax=i3
+output eDP-1 disable
+output HDMI-A-2 resolution 1920x1080 position 0,0
+output DP-3 resolution 2560x1440 position 1920,0
+output DP-2 resolution 2560x1440 position 4480,0
+
+exec_always wallpaper --backend Sway --random

@@ -1,0 +1,4 @@
+# vim: syntax=i3
+gaps inner 20
+gaps outer 20
+
