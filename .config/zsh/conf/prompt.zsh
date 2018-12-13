@@ -1,5 +1,5 @@
 setopt PROMPT_SUBST
-source $ZSH/vcs/zshrc.sh
+source $ZDOTDIR/vcs/zshrc.sh
 
 for color in {000..255}; do
     FG[$color]="%{[38;5;${color}m%}"

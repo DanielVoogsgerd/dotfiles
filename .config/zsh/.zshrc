@@ -1,3 +1,5 @@
+
+
 # Config alias :D
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -5,9 +7,11 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-ZSH=$HOME/.config/zsh
 cdir=$HOME/.cdir
 
+
+autoload -U compinit
+compinit -d ${XDG_CACHE_HOME:=~/.cache}/zsh/zcompdump-$ZSH_VERSION
 
 export USERRUNDIR="/run/user/$(id -u)"
 
@@ -26,17 +30,17 @@ function load {
 
 
 load $HOME/.userconfig/zsh/before.zsh "Loading user settings (Before)"
-load "$ZSH/settings.zsh" "Loading general settings"
+load "$ZDOTDIR/settings.zsh" "Loading general settings"
 
 # Loading imported libraries
 shell_log "Loading libraries"
-for file in $ZSH/lib/*.zsh; do
+for file in $ZDOTDIR/lib/*.zsh; do
 	load $file "Loading library: ($file)"
 done
 
 # Loading configs
 shell_log "Loading configs"
-for file in $ZSH/conf/*.zsh; do
+for file in $ZDOTDIR/conf/*.zsh; do
 	load $file "Loading config: ($file)"
 done
 unset file

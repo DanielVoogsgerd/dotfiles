@@ -1,8 +1,5 @@
-autoload -U compinit
 autoload -U colors
 colors
-
-compinit -C
 
 # why would you type 'cd dir' if you could just type 'dir'?
 setopt AUTO_CD
