@@ -1,11 +1,6 @@
 setopt PROMPT_SUBST
 source $ZDOTDIR/vcs/zshrc.sh
 
-for color in {000..255}; do
-    FG[$color]="%{[38;5;${color}m%}"
-    BG[$color]="%{[48;5;${color}m%}"
-done
-
 # Besides an ordinairy prompt I also set the terminal window to contain the executed command. Thanks to Brian from bstpierre
 function title() {
     # escape '%' chars in $1, make nonprintables visible
@@ -29,10 +24,7 @@ function title() {
 function precmd() {
     title "zsh" "%m:%55<...<%~"
 	if [ -f ~/.zhistory ]; then
-		commandcount=$(wc -l ~/.zhistory)
-		commandcount=${commandcount%%[[:space:]]*.*}
-	else
-		commandcount=0
+		commandcount=$(wc -l < ~/.zhistory)
 	fi
 }
 
@@ -41,38 +33,53 @@ function preexec() {
     title "$1" "%m:%35<...<%~"
 }
 
-function gen_clc() {
-    echo "%{%F{$1}%}"
+function shell_icon {
+	if [[ "$(stat -f -c %T .)" == 'cifs' ]]; then
+		echo "☁"
+	elif [[ "$USER" == "root" ]]; then
+		echo "#"
+	else
+		echo "$"
+	fi
 }
 
-clc_default="004"
-clc_name="011"
-clc_hostname="005"
-clc_path="027"
-clc_reset="$reset_color"
-clc_end="015"
-
 function prompt() {
-    local PCLC_NAME=$(gen_clc "$clc_name")
-    local PCLC_DEFAULT=$(gen_clc "$clc_default")
-    local PCLC_HOSTNAME=$(gen_clc "$clc_hostname")
-    local PCLC_PATH=$(gen_clc "$clc_path")
-    local PCLC_RESET=$(gen_clc "$clc_reset")
-    local PCLC_END=$(gen_clc "$clc_end")
+	local p_hostname="%F{005}"
+	local p_path="%F{027}"
 
 	PROMPT=""
 
-	if [[ "$USER" != "$username" ]]; then
-		PROMPT+="$PCLC_NAME%n "
+	if [[ "$USER" == "root" ]]; then
+		PROMPT+="%F{001} $USER"
+	elif [[ "$USER" != "$username" ]]; then
+		PROMPT+="%F{011} $USER"
 	fi
 
-	if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
-		PROMPT+="$PCLC_DEFAULT@$PCLC_HOSTNAME%m%f "
+	PROMPT+=" $p_path"
+	PROMPT+="%~ "
+	PROMPT+="%f"
+	PROMPT+='$(vcs_super_info_wrapper)'
+	PROMPT+='$(shell_icon)'
+	PROMPT+="%f "
+
+	RPROMPT=""
+
+	if [ -z "$commandcount" ]; then
+		RPROMPT+="%F{004}["
+		RPROMPT+="%F{012}"'${commandcount}'
+		RPROMPT+="%F{004}]"
 	fi
 
-	PROMPT+="$PCLC_PATH%~%f"'$(vcs_super_info_wrapper)'"$PCLC_END "'$(shell_icon)'" "
+	RPROMPT+="%F{004}"
+	RPROMPT+="[%(?,%F{012},%F{001})"
+	RPROMPT+="%?"
+	RPROMPT+="%F{004}]"
 
-	RPROMPT="%{%F{004}%}[%{%F{012}%}"'${commandcount}'"%{%F{004}%}]%{%F{004}%}[%(?,%{%F{012}%}%?,%{%F{001}%}%?)%{%F{004}%}]"
-	RPROMPT+='%F{004}[%F{012}%*%F{004}]%f'
+	RPROMPT+="%F{004}["
+	RPROMPT+="%F{012}%*"
+	RPROMPT+="%F{004}]"
+	RPROMPT+="%f"
 }
+
+
 prompt
