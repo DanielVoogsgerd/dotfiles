@@ -51,9 +51,7 @@ alias temp='cd "$(mktemp -d)"'
 function ef { edit `f $1` }
 
 # Conserve directories
-alias conserveDir="pwd>$cdir"
-alias tmux="conserveDir && tmux -2"
-alias refresh="conserveDir && exec zsh"
+alias refresh="exec zsh"
 
 # Grep is awesome, but some things should be default for me
 alias grep="grep --exclude-dir='.svn' --exclude-dir='.git' --color=auto"
@@ -76,3 +74,6 @@ alias lmreset="artisan migrate:reset"
 
 # Activate virtualenv
 alias activate="source ./bin/activate"
+
+# Config alias :D
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

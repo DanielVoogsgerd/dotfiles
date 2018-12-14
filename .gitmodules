@@ -1,9 +1,6 @@
-[submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim
-[submodule ".zsh/vcs"]
-	path = .zsh/vcs
+[submodule ".config/zsh/plugin/vcs"]
+	path = .config/zsh/plugins/vcs
 	url = https://github.com/yonchu/zsh-vcs-prompt
-[submodule ".zsh/fasd"]
-	path = .zsh/fasd
+[submodule ".config/plugins/fasd"]
+	path = .config/zsh/plugins/fasd
 	url = https://github.com/clvv/fasd.git

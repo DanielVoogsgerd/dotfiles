@@ -1,5 +1,5 @@
 setopt PROMPT_SUBST
-source $ZDOTDIR/vcs/zshrc.sh
+source $ZDOTDIR/plugins/vcs/zshrc.sh
 
 # Besides an ordinairy prompt I also set the terminal window to contain the executed command. Thanks to Brian from bstpierre
 function title() {
@@ -23,8 +23,8 @@ function title() {
 # precmd is called just before the prompt is printed
 function precmd() {
     title "zsh" "%m:%55<...<%~"
-	if [ -f ~/.zhistory ]; then
-		commandcount=$(wc -l < ~/.zhistory)
+	if [ -f $HISTFILE ]; then
+		commandcount=$(wc -l < $HISTFILE)
 	fi
 }
 

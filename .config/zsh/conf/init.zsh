@@ -1,4 +1,2 @@
-load $HOME/.nvm/nvm.sh "Loading nvm"
-
-source $ZDOTDIR/fasd/fasd
+source $ZDOTDIR/plugins/fasd/fasd
 eval "$(fasd --init auto)"
