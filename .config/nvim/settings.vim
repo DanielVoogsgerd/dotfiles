@@ -19,6 +19,8 @@ set statusline+=%{getcwd()}
 let mapleader=","
 
 " Enable deoplete
+
+set completeopt=noinsert,longest,menuone
 let g:deoplete#enable_at_startup = 1
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -33,13 +35,8 @@ let g:vebugger_leader="<leader>b"
 " Enable vim hardtime
 let g:hardtime_default_on = 1
 
+let NERDSpaceDelims=1
 
-" let g:ale_completion_enabled = 1
-let g:ale_linters = {
-\   'python': ['pyls'],
-\}
-
-highlight ALEWarning ctermbg=DarkMagenta
 
 " Automatically resource nvim config
 if ! exists("g:reloadcfg")
