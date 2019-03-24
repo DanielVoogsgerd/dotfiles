@@ -1,11 +1,12 @@
 #!/bin/bash
-
 #NEXT_UP=$(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"\t" 'NR==1{ print $1 " " $2 " " $3 " " $4 " " $5 }')
-
-
 IFS=$'\n'
 
 i=0
+
+MAX_ENTRIES=${2:-3}
+
+
 for NEXT_UP in $(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"\t" '{ print $1 " " $2 " " $3 " " $4 " " $5 }'); do
 	START_DATE=${NEXT_UP:0:10}
 	START_TIME=${NEXT_UP:11:5}
@@ -18,6 +19,7 @@ for NEXT_UP in $(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"
 	EVENT=${NEXT_UP:34}
 
 	IN_X_HOURS=$(date -d "+$1 hour" "+%F %H:%M")
+	IN_1_HOUR=$(date -d "+1 hour" "+%F %H:%M")
 	NOW=$(date "+%F %H:%M")
 
 	# Event is over
@@ -28,10 +30,16 @@ for NEXT_UP in $(gcalcli agenda --tsv | grep -v -P 'Week \d+ of \d{4}' | awk -F"
 
 	[ "$i" -ne "0" ] && echo -n ' | '
 
-	echo -n "$START_TIME $EVENT"
+	if [[ "$NOW" > "$START_DATETIME" ]]; then
+		echo -n "<span color='#C3E88D'>$START_TIME $EVENT</span>"
+	elif [[ "$IN_1_HOUR" > "$START_DATETIME" ]]; then
+		echo -n "<span color='#F07178'>$START_TIME $EVENT</span>"
+	else
+		echo -n "$START_TIME $EVENT"
+	fi
 
 	i=$(($i+1))
 
-	[ "$i" -ge "$2" ] && exit
+	[ "$i" -ge "$MAX_ENTRIES" ] && exit
 done
 

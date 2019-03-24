@@ -2,7 +2,6 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 color=#FFFFFF
 markup=pango
 
-
 [agenda]
 command=$SCRIPT_DIR/agenda 10 3
 interval=60
