@@ -78,3 +78,13 @@ function diff {
 	git diff --no-index -- $@
 }
 
+function zd {
+    local file
+    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+function ef {
+    [ $# -gt 0 ] && fasd -f -e ${EDITOR} "$*" && return
+    local file
+    file="$(fasd -Rfl "$1" | fzf --preview 'preview {}' -1 -0 --no-sort +m)" && edit "${file}" || return 1
+}
