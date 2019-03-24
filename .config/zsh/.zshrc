@@ -35,3 +35,4 @@ typeset -U path cdpath fpath
 
 load /usr/share/fzf/completion.zsh "Loading fzf completion"
 load /usr/share/fzf/key-bindings.zsh "Loading fzf key-bindings"
+load $ZDOTDIR/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh

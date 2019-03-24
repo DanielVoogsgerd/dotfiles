@@ -4,3 +4,6 @@
 [submodule ".config/plugins/fasd"]
 	path = .config/zsh/plugins/fasd
 	url = https://github.com/clvv/fasd.git
+[submodule ".config/zsh/plugins/zsh-interactive-cd"]
+	path = .config/zsh/plugins/zsh-interactive-cd
+	url = https://github.com/changyuheng/zsh-interactive-cd.git
