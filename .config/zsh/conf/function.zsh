@@ -12,9 +12,8 @@ function server {
 }
 
 function edit {
-	FILE=$1
+	local FILE=$1
 	if [ -w "$FILE" ] || [ -w "$(dirname $FILE)" ]; then
-		echo "Write permission is granted on $FILE"
 		if hash "$VISUAL" 2>/dev/null; then
 			$VISUAL "$FILE"
 		elif hash "$EDITOR" 2>/dev/null; then
@@ -24,9 +23,6 @@ function edit {
 			return 1
 		fi
 	else
-		echo "Write permission is NOT granted on $FILE"
-		echo "Opening using sudoedit"
-		sleep 0.5
 		sudoedit $FILE
     fi
 }
