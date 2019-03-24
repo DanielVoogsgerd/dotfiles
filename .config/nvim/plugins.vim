@@ -17,6 +17,7 @@ Plug 'Dimercel/todo-vim'
 
 Plug 'takac/vim-hardtime'
 Plug 'airblade/vim-rooter'
+Plug 'machakann/vim-highlightedyank'
 
 " Debugging
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
