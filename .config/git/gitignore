@@ -2,3 +2,9 @@
 *.sublime-workspace
 *.sublime-project
 .vscode
+__pycache__
+*.egg-info
+
+.mypy_cache
+.synctex.gz
+.synctex
