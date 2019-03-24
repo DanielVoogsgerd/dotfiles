@@ -8,7 +8,11 @@ done
 alias sudo="sudo "
 
 # Better listing
-alias ls="ls --color=auto -h -F"
+if [ -e '/usr/bin/exa' ]; then
+	alias ls="exa"
+else
+	alias ls="ls --color=auto -h -F"
+fi
 alias la="ls -lAh"
 alias lsa="ls -lah"
 alias l="ls -lh"
