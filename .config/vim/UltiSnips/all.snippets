@@ -1,0 +1,23 @@
+# ┌───────────────────────────────────────────┐
+# │ Here all the general snippets are defined │
+# └───────────────────────────────────────────┘
+
+priority -60
+
+snippet sign "Signature"
+Yours sincerely,
+
+Daniel Voogsgerd
+endsnippet
+
+snippet today "Date"
+`date +%F`
+endsnippet
+
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+

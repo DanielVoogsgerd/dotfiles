@@ -1,0 +1,15 @@
+snippet listen "Listen" b
+listen ${1:443}${2: ssl};
+listen [::]:$1$2;
+$0
+endsnippet
+
+snippet cert "Certificates" b
+ssl_certificate 	/etc/letsencrypt/live/$1/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/$1/privkey.pem;
+$0
+endsnippet
+
+snippet redirect "Redirect"
+return 301 https://$host/;
+endsnippet

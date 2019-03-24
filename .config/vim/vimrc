@@ -1,0 +1,175 @@
+set nocompatible               " be iMproved
+
+" file locations, making vim adhere somewhat to xdg base dirs
+set undodir=$XDG_CACHE_HOME/vim/undo
+set directory=$XDG_CACHE_HOME/vim/swap
+set backupdir=$XDG_CACHE_HOME/vim/backup
+set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+
+
+call plug#begin('$XDG_DATA_HOME/vim/plugins')
+set encoding=utf8
+
+Plug 'TPope/Vim-Sensible'
+Plug 'TPope/Vim-Git'
+Plug 'TPope/Vim-Fugitive'
+Plug 'TPope/Vim-Surround'
+Plug 'TPope/Vim-Repeat'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+
+"" Colourscheme
+" Temporary fix to get base16 to work see: https://github.com/chriskempson/base16-vim/issues/197
+function FixupBase16(info)
+    !sed -i '/Base16hi/\! s/a:\(attr\|guisp\)/l:\1/g' ~/.local/share/vim/plugins/base16-vim/colors/*.vim
+endfunction
+Plug 'chriskempson/base16-vim', { 'do': function('FixupBase16') }
+
+"" Syntax plugins
+Plug 'Potatoesmaster/i3-Vim-Syntax'
+Plug 'chr4/nginx.vim'
+Plug 'yeahnoob/icinga2-vim'
+Plug 'Leafgarland/Typescript-Vim'
+Plug 'nvie/vim-flake8'
+
+
+call plug#end()
+" End Plugins
+
+filetype plugin indent on
+
+" Enable 256 Colours in vim
+set t_Co=256
+
+" Visual settings
+hi clear
+syntax on
+set background=dark
+let base16colorspace=256
+colorscheme base16-material-darker
+
+" Make the background transparent
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+
+" Couple settings
+set number
+set relativenumber
+set showcmd
+
+
+" Remaps
+nnoremap ; :
+inoremap jj <Esc>
+
+" Easier split workflow
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+let s:tabwidth=4
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Searchoptions
+set ignorecase
+set hlsearch
+
+let mapleader = ","
+let g:mapleader = ","
+
+" Disable vim intro message
+set shortmess=I
+
+" Let's stop using the arrow keys
+noremap <Up> :m -2<CR>
+noremap <Down> :m +1<CR>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+noremap <ScrollWheelUp> <NOP>
+noremap <S-ScrollWheelUp> <NOP>
+noremap <ScrollWheelDown> <NOP>
+noremap <S-ScrollWheelDown> <NOP>
+
+" Down is really the next line
+nnoremap j gj
+nnoremap k gk
+
+" Quickly open vimrc
+command! Vimrc :e ~/.vimrc
+nnoremap <leader>rc :Vimrc<CR>
+command! Reload :so $MYVIMRC
+nnoremap <leader>rl :Reload<CR>
+
+" Keybinds
+vnoremap <leader>so :sort u<CR>
+
+" Git bindings
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gc :Gcommit -q<CR>
+nnoremap <leader>gps :Gpush<CR>
+nnoremap <leader>gpl :Gpull<CR>
+nnoremap <leader>go :Copen<CR>
+nnoremap <leader>gg :GitGutterSignsToggle<CR>
+
+nmap <Leader>gsh <Plug>GitGutterStageHunk
+nmap <Leader>gnh <Plug>GitGutterNextHunk
+nmap <Leader>gph <Plug>GitGutterPrevHunk
+
+
+let g:gitgutter_map_keys = 0
+
+nnoremap <C-B> :!./%<CR>
+
+" Trailing whitespace and incorrect indentation
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+" This probably makes some people cringe, but it's nice and consistent
+nnoremap <C-T> :tabe<CR>
+nnoremap <C-W> :tabclose<CR>
+
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
+
+" Since I use visual block mode way more often than visual mode; why don't we just swap them.
+nnoremap    v   <C-V>
+nnoremap <C-V>     v
+
+vnoremap    v   <C-V>
+vnoremap <C-V>     v
+
+" Add slash seperated text object
+onoremap <silent> i/e:<C-U>normal! T/vt/<CR>
+onoremap <silent> a/ :<C-U>normal! F/vf/<CR>
+xnoremap <silent> i/ :<C-U>normal! T/vt/<CR>
+xnoremap <silent> a/ :<C-U>normal! F/vf/<CR>
+
+
+" Spellcheck for English, Basic English and Dutch
+nmap <leader>s  :set invspell spelllang=en<CR>
+nmap <leader>ss :set invspell spelllang=en-basic<CR>
+nmap <leader>sd :set invspell spelllang=nl<CR>
+
+" Write using sudo
+cmap w!! w !sudo tee > /dev/null %
+
+" Some visual hints
+set cursorline " Highlights current line
+highlight cursorline ctermbg=darkgrey
+set cursorcolumn " Highlight current column
+highlight cursorcolumn ctermbg=darkgrey
+
+set colorcolumn=81,121 " Highlight column 81 and 121
+highlight ColorColumn ctermbg=darkgrey
+
+highlight NonText ctermbg=none

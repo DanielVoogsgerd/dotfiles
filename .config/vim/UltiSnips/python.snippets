@@ -1,0 +1,54 @@
+snippet main "main" b
+if __name__ == "__main__":
+	${1:main()}
+$0
+endsnippet
+
+snippet shebang "Shebang" b
+#!/usr/bin/python
+endsnippet
+
+snippet def "function" b
+def ${1:func_name}($2):
+	${3:pass}
+$0
+endsnippet
+
+snippet 'def (\S+)' "function2" r
+def `!p snip.rv=match.group(1)`($2):
+	${3:pass}
+$0
+endsnippet
+
+
+snippet adef "async function" b
+async def ${1:func_name}($2):
+	${3:pass}
+$0
+endsnippet
+
+snippet class "class" b
+class ${1:ClassName}:
+	def __init__(self$2):
+		$3
+
+	def ${4:method_name}(self, $5):
+		$6
+$0
+endsnippet
+
+snippet parser "Argument Parser" b
+parser = argparse.ArgumentParser($1)
+$0
+endsnippet
+
+snippet argument "Argparse argument" b
+parser.add_argument($1)
+$0
+endsnippet
+
+snippet logger "Description" b
+logger = logging.getLogger(${1:__name__})
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(module)s %(levelname)s %(message)s')
+$0
+endsnippet
