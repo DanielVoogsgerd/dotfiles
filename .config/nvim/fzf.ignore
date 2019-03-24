@@ -1,0 +1,9 @@
+*.pdf
+*.synctex.gz
+
+# Images NVIM can't show them so why bother
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.tif
