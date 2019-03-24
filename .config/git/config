@@ -31,11 +31,6 @@
 	changed = green
 	untracked = cyan
 
-[init]
-	# Add some hooks by default
-	templatedir = ~/Environment/git/templates
-
-
 [grep]
 	lineNumber = true
 
