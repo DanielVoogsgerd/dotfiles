@@ -58,7 +58,7 @@ alias grep="grep --exclude-dir='.svn' --exclude-dir='.git' --color=auto"
 alias grepr="grep -rnH"
 
 # Better cp, why send the same file twice
-alias cp="rsync -aP"
+alias rcp="rsync -aP"
 
 # Because capslock should have been ctrl for the get go
 alias swapcaps="/usr/bin/setxkbmap -option 'ctrl:swapcaps'"
