@@ -1,0 +1,14 @@
+input 5426:269:Razer_Razer_BlackWidow_Ultimate {
+	xkb_layout us
+	xkb_variant ,nodeadkeys
+	xkb_options ctrl:nocaps
+}
+
+input 5426:22:Razer_Razer_DeathAdder {
+	pointer_accel -0.7
+}
+
+input 1386:210:Wacom_Bamboo_Craft_Pen {
+	left_handed enabled
+	map_to_output DP-2
+}

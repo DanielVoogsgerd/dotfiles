@@ -8,9 +8,9 @@ bar {
         separator  $semitransparent
         background $semitransparent
         statusline $semitransparent
-        focused_workspace  $semitransparent $semitransparent $base0D
-        active_workspace   $semitransparent $semitransparent $base03
-        inactive_workspace $semitransparent $semitransparent $base03
-        urgent_workspace   $red         $red         $base05
+        focused_workspace  $semitransparent 	$semitransparent 	$base0B
+        active_workspace   $semitransparent 	$semitransparent 	$base0D
+        inactive_workspace $semitransparent 	$semitransparent 	$base03
+        urgent_workspace   $base0F 				$base0F 			$base0F
     }
 }

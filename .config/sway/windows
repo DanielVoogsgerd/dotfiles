@@ -1,0 +1,2 @@
+for_window [class="vimanywhere"] floating enable
+for_window [class="vimanywhere"] resize set 600px 130px

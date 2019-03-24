@@ -1,9 +1,18 @@
 # vim: syntax=i3
-default_border pixel 1
+default_border pixel 2
 
-client.focused          $base0D	$base0D	$base05	$base0D $base0D
+client.focused          $base0B	$base0B	$base02	$base0D $base0B
 client.focused_inactive $base0C	$base0C	$base05	$base0C $base0C
 client.unfocused        $base03	$base03	$base05	$base03 $base03
-client.urgent           $red	$red	$base05	$red	$red
+client.urgent           $base0F	$base0F	$base05	$base0F	$base0F
 
 # Border, background, text, indicator, child-border
+
+workspace $workspace1 output DP-2
+workspace $workspace2 output DP-3
+workspace $workspace3 output DP-3
+workspace $workspace4 output DP-2
+workspace $workspace8 output HDMI-A-2
+workspace $workspace9 output HDMI-A-2
+workspace $workspace10 output HDMI-A-2
+

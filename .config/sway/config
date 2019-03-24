@@ -3,10 +3,11 @@
 # Todo read this stuff in a more sensible way
 exec ~/.sway_init
 include ~/.config/sway/settings
+include ~/.config/sway/inputs
 include ~/.config/sway/colorscheme
 include ~/.config/sway/bar
 include ~/.config/sway/gaps
 include ~/.config/sway/keymap
 include ~/.config/sway/monitors
 include ~/.config/sway/layout
-
+include ~/.config/sway/windows
