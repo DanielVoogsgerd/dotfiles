@@ -1,50 +1,69 @@
 call plug#begin('~/.local/share/nvim/plugins')
+" ┌───────────┐
+" │ Movements │
+" └───────────┘
 Plug 'tpope/vim-surround'
 
-"Plug 'autozimu/LanguageClient-neovim', {
-    "\ 'branch': 'next',
-    "\ 'do': 'bash install.sh',
-    "\ }
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ervandew/supertab'
-
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'sirver/ultisnips'
-Plug 'scrooloose/nerdcommenter'
-Plug 'Dimercel/todo-vim'
-
-Plug 'takac/vim-hardtime'
-Plug 'airblade/vim-rooter'
-Plug 'machakann/vim-highlightedyank'
-
-" Debugging
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'idanarye/vim-vebugger'
-
-
-" LaTeX
-Plug 'lervag/vimtex'
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug '907th/vim-auto-save'
-
-" Colourschemes
-Plug 'chriskempson/base16-vim'
-
+" ┌───────────┐
+" │ Languages │
+" └───────────┘
+Plug 'autozimu/LanguageClient-neovim', { 'do': 'bash install.sh' }
 Plug 'w0rp/ale'
 
+" LaTeX
+Plug '907th/vim-auto-save', {'for': 'tex'} " I only use autosave for tex
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 
-" Syntax plugins
+" i3 window manager
 Plug 'Potatoesmaster/i3-Vim-Syntax'
+
+" NGiNX config
 Plug 'chr4/nginx.vim'
+
+" Icinga config
 Plug 'yeahnoob/icinga2-vim'
+
+" Typescript
 Plug 'Leafgarland/Typescript-Vim'
+
+" Python
 Plug 'nvie/vim-flake8'
 
+" ┌────────────────┐
+" │ Autocompletion │
+" └────────────────┘
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ervandew/supertab'
+" Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-path'
 
-" Testing
+" ┌────────────┐
+" │ Appearance │
+" └────────────┘
+Plug 'airblade/vim-gitgutter'
+Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'machakann/vim-highlightedyank'
 
+" ┌───────────┐
+" │ Debugging │
+" └───────────┘
+Plug 'idanarye/vim-vebugger'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" ┌──────┐
+" │ Misc │
+" └──────┘
+Plug 'Dimercel/todo-vim'
+Plug 'airblade/vim-rooter'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sirver/ultisnips'
+Plug 'takac/vim-hardtime'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
